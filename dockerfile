@@ -1,12 +1,13 @@
-FROM python:3.13-alpine
+FROM python:3.10-slim
 
 WORKDIR /app
 
 # Instala dependências do sistema
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
     libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
-
+    
 # Copia os arquivos
 COPY requirement.txt .
 RUN pip install --no-cache-dir -r requirements.txt

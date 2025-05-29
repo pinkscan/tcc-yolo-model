@@ -4,7 +4,7 @@ from PIL import Image
 import io
 
 app = Flask(__name__)
-model = YOLO("model.pt")
+model = YOLO("best.pt")
 
 @app.route("/predict", methods=["POST"])
 def predict():

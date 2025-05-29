@@ -12,7 +12,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY infer.py .
-COPY model.pt .
+COPY best.pt .
 
 EXPOSE 5000
 CMD ["python", "infer.py"]

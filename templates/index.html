@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Classificação de Mamografias</title>
+</head>
+<body>
+    <h1>Classificação de Mamografias</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if prediction is not none %}
+        <p><strong>Previsão:</strong> {{ 'Câncer' if prediction == 1 else 'Normal' }}</p>
+        <p><strong>Probabilidades:</strong></p>
+        <ul>
+            <li>Câncer: {{ prob.cancer }}</li>
+            <li>Normal: {{ prob.normal }}</li>
+        </ul>
+    {% endif %}
+
+    {% if filename %}
+        <p><strong>Imagem enviada:</strong></p>
+        <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Imagem enviada" style="max-width: 300px;">
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept=".pgm" required />
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
